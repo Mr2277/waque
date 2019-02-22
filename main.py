@@ -25,7 +25,7 @@ print(corpos)
 '''
 import jieba
 import jieba.analyse
-words=jieba.cut("漂亮可爱被骚浩嫌弃的杨苗苗是个王八蛋")
+words=jieba.cut("招商银行是商业银行")
 print("/".join(words))
 tags = jieba.analyse.extract_tags(words, topK=100, withWeight=False)
 text=" ".join(tags)

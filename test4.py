@@ -1,33 +1,16 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-#coding=utf-8
-
-#导入wordcloud模块和matplotlib模块
-from wordcloud import WordCloud, ImageColorGenerator
-import matplotlib.pyplot as plt
+import jieba.analyse
+from os import path
 from scipy.misc import imread
-
-
-#读取一个txt文件
-
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 text = open('/home/sun/Documents/test.txt','r').read()
-
-#读入背景图片
-
+tags = jieba.analyse.extract_tags(text, topK=100, withWeight=False)
+text = " ".join(tags)
+print(text)
 bg_pic = imread('3.png')
-
-#生成词云
-
 wordcloud = WordCloud(font_path='/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc',mask=bg_pic,background_color='white',scale=1.5).generate(text)
-
 image_colors = ImageColorGenerator(bg_pic)
-#显示词云图片
-
 plt.imshow(wordcloud)
 plt.axis('off')
 plt.show()
-
-
-#保存图片
-
-#wordcloud.to_file('test.jpg')
